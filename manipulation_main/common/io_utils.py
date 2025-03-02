@@ -38,7 +38,7 @@ def load_yaml(file_path):
         A dict with the loaded configuration.
     """
     with open(os.path.expanduser(file_path), 'r') as f:
-        config = yaml.load(f)
+        config = yaml.load(f, Loader=yaml.FullLoader)
     return config
 
 

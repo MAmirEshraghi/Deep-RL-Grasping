@@ -5,7 +5,8 @@ It is used by the simulation environment (RobotEnv) to execute the actions deter
 """
 
 import numpy as np  # Numerical computations.
-import gym  # For defining Gym-compatible action and observation spaces.
+import gymnasium as gym # For defining Gym-compatible action and observation spaces.
+
 from sklearn.preprocessing import MinMaxScaler  # To scale actions into a normalized range.
 
 class Actuator:

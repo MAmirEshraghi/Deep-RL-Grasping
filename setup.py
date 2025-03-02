@@ -1,26 +1,30 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='gripperEnv',
     version='0.0.1',
+    packages=find_packages(
+        include=['manipulation_main', 'manipulation_main.*'],
+        exclude=['models', 'models.*', 'config', 'config.*']
+    ),
     install_requires=[
-        'stable-baselines==2.10.1',
-        'tensorflow==1.14.0',
-        # for GPU usage comment up and uncomment down
-        # tensorflow_gpu==1.14.0
-        'gym==0.19.0',
-        'keras==2.2.4',
-        'matplotlib==3.3.4',
-        'numpy==1.18',
-        'opencv-contrib-python==4.5.5.64',
-        'pandas==1.1.5',
-        'pybullet==3.2.5',
-        'pytest==7.0.1',
+        'stable-baselines3',
+        'tensorflow==2.13.0',
+        #'tensorflow_gpu=',
+        #'tf-agents',
+        'gym==0.26.2',
+        #'keras==2.2.4',
+        'matplotlib==3.7.2',
+        'numpy==1.24',
+        'opencv-contrib-python==4.8.0.76',
+        'pandas==2.2',
+        'pybullet==3.2.7',
+        'pytest==7.4.2',
         'pydot==1.4.2',
-        'PyYAML==5.4.1',
-        'seaborn==0.11.2',
-        'scikit-learn==0.24.2',
-        'tqdm==4.64.0',
-        'paramiko==2.10.3',
+        'PyYAML==6.0.1',
+        'seaborn==0.12',
+        'scikit-learn==1.3.2',
+        'tqdm==4.66.1',
+        'paramiko==2.12.0',
     ],
 )
