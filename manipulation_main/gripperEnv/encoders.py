@@ -3,18 +3,29 @@ This script implements encoder models to learn compact representations of image 
 It provides a base Encoder class with methods for training, testing, saving/loading weights, and plotting the network,
 and a SimpleAutoEncoder that builds a vanilla convolutional autoencoder used for encoding depth images.
 This module is used by sensor components (e.g., EncodedDepthImgSensor) to preprocess visual inputs.
+Updated for TensorFlow 2.x.
 """
+
 import os  # For handling file paths.
 import numpy as np  # For numerical computations.
-from keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping  # For managing training callbacks.
-from keras.layers import (Conv2D, Dense, Flatten, Input,
-                          LeakyReLU, Reshape, UpSampling2D)  # For constructing convolutional layers.
-from keras.models import Model  # To create Keras models.
-from keras.optimizers import Adam  # For model optimization.
-from keras.utils import plot_model  # For visualizing the model architecture.
-from keras.backend.tensorflow_backend import get_session, set_session  # For managing TensorFlow sessions.
+import tensorflow as tf  # TensorFlow 2.x backend for deep learning models.
 
-import tensorflow as tf  # TensorFlow backend for deep learning models.
+# Use tf.keras imports for model building and training.
+from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping  # For managing training callbacks.
+from tensorflow.keras.layers import Conv2D, Dense, Flatten, Input, LeakyReLU, Reshape, UpSampling2D  # For constructing convolutional layers.
+from tensorflow.keras.models import Model  # To create Keras models.
+from tensorflow.keras.optimizers import Adam  # For model optimization.
+from tensorflow.keras.utils import plot_model  # For visualizing the model architecture.
+
+# Configure TensorFlow to allow dynamic GPU memory growth.
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError as e:
+        print(e)
+
 
 class Encoder(object):
     """Base class for learning abstract representations of image observations via autoencoding."""
@@ -31,12 +42,10 @@ class Encoder(object):
         raise NotImplementedError
 
     def load_weights(self, model_dir):
-        """Loads pretrained weights from the specified directory and prepares the model for prediction."""
+        """Loads pretrained weights from the specified directory."""
         model_dir = os.path.expanduser(model_dir)
         weights_path = os.path.join(model_dir, 'model.h5')
         self._model.load_weights(weights_path)
-        # Prepare the model for prediction by creating a predict function.
-        self._model._make_predict_function()
 
     def plot(self, model_dir):
         """Saves visualizations of the encoder and decoder network architectures to the specified directory."""
@@ -69,13 +78,11 @@ class Encoder(object):
 
     def predict(self, imgs):
         """Generates predictions for the given images using the full autoencoder model."""
-        with self.session.as_default():
-            return self._model.predict(imgs)
+        return self._model.predict(imgs)
 
     def encode(self, imgs):
         """Generates encoded representations for the given images using only the encoder part of the network."""
-        with self.session.as_default():
-            return self._encoder.predict(imgs)
+        return self._encoder.predict(imgs)
 
     @property
     def encoding_shape(self):
@@ -88,14 +95,8 @@ class SimpleAutoEncoder(Encoder):
     
     def _build(self, config):
         """Builds the convolutional autoencoder architecture based on the provided configuration parameters."""
-        # Configure TensorFlow session to allow dynamic GPU memory allocation.
-        config_tf = tf.ConfigProto()
-        config_tf.gpu_options.allow_growth = True  # Allow GPU memory to grow as needed.
-        self.session = tf.Session(config=config_tf)
-        set_session(self.session)  # Set the current session for Keras.
-        init = tf.global_variables_initializer()  # Initialize all TensorFlow variables.
-        self.session.run(init)  # Run the initialization.
-
+        # Configure TensorFlow to allow dynamic GPU memory allocation (handled above globally).
+        
         # Retrieve network architecture specifications and encoding dimension from config.
         network = config['network']  # List of dicts; each dict defines a convolutional layer.
         encoding_dim = config['encoding_dim']  # Size of the latent vector.
@@ -116,14 +117,13 @@ class SimpleAutoEncoder(Encoder):
             h = LeakyReLU(alpha)(h)
 
         # Save the shape of the final convolutional output to reconstruct dimensions in the decoder.
-        shape = h._keras_shape[1:]
+        shape = h.shape[1:]
         h = Flatten()(h)  # Flatten the feature maps into a vector.
         h = Dense(encoding_dim)(h)  # Reduce to the desired encoding dimension.
         z = LeakyReLU(alpha)(h)  # Apply activation to the latent vector.
 
         # Define the encoder model mapping inputs to the latent representation.
         self._encoder = Model(inputs, z, name='encoder')
-        self._encoder._make_predict_function()  # Prepare the encoder for prediction.
 
         # Build the decoder: reconstruct the image from the encoded representation.
         latent_inputs = Input(shape=(encoding_dim,))
