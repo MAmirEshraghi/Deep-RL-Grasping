@@ -90,11 +90,11 @@ To train an agent using SAC with a specific configuration, run:
 ```bash
 python manipulation_main/training/train_stable_baselines.py train --config config/simplified_object_picking.yaml --algo SAC --model_dir trained_models/SAC_full --timestep 10000 -v
 ```
-#Explanation:
+# Explanation:
 
 train: Calls the training sub-command.
---config: Path to the YAML configuration file.
---algo: RL algorithm (e.g., SAC, PPO).
---model_dir: Directory for saving the model and logs.
---timestep: Total number of timesteps for training.
--v: Enables visualization.
+* --config: Path to the YAML configuration file.
+* --algo: RL algorithm (e.g., SAC, PPO).
+* --model_dir: Directory for saving the model and logs.
+* --timestep: Total number of timesteps for training.
+* -v: Enables visualization.
