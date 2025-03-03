@@ -71,3 +71,30 @@ DeepRL-Grasping/
 └── README.md                          # Project overview and instructions (if available)
 
 ```
+
+# Installation and Usage
+
+## Installation
+
+### Clone the Repository
+```bash
+git clone https://github.com/your_username/DeepRL-Grasping.git
+cd DeepRL-Grasping
+```
+
+
+## Usage
+# Training
+To train an agent using SAC with a specific configuration, run:
+
+```bash
+python manipulation_main/training/train_stable_baselines.py train --config config/simplified_object_picking.yaml --algo SAC --model_dir trained_models/SAC_full --timestep 10000 -v
+```
+#Explanation:
+
+train: Calls the training sub-command.
+--config: Path to the YAML configuration file.
+--algo: RL algorithm (e.g., SAC, PPO).
+--model_dir: Directory for saving the model and logs.
+--timestep: Total number of timesteps for training.
+-v: Enables visualization.
