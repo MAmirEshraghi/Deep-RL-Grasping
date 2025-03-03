@@ -78,7 +78,7 @@ DeepRL-Grasping/
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/your_username/DeepRL-Grasping.git
+git clone https://github.com/MAmirEshraghi/DeepRL-Grasping.git
 cd DeepRL-Grasping
 ```
 
