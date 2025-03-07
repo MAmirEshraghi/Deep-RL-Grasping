@@ -91,7 +91,6 @@ To train an agent using SAC with a specific configuration, run:
 ```bash
 python manipulation_main/training/train_stable_baselines.py train --config config/simplified_object_picking.yaml --algo SAC --model_dir trained_models/SAC_full --timestep 10000 -v
 ```
-## Explanation:
 
 train: Calls the training sub-command.
 * --config: Path to the YAML configuration file.
@@ -106,7 +105,6 @@ To run a trained model, execute:
 ```bash
 python manipulation_main/training/train_stable_baselines.py run --model trained_models/SAC_full/best_model/best_model.zip -v -t -s
 ```
-## Explanation:
 
 run: Calls the evaluation sub-command.
 * --model: Path to the saved model file.
@@ -117,15 +115,14 @@ run: Calls the evaluation sub-command.
 # Configuration
 ## YAML Files:
 The config folder contains YAML files that define parameters for different tasks and environments (e.g., gripper_grasp.yaml, simplified_object_picking.yaml).
-* Dependencies
-* Python 3.x
-* PyBullet
+Dependencies
+* Python 3.11
+* PyBullet 3.2.7
 * Gymnasium (formerly Gym)
 * Stable-Baselines3
-* TensorFlow (for legacy modules, if used)
 * PyTorch (used by Stable-Baselines3)
-* OpenCV
-* NumPy
+* OpenCV 4.8.0.76
+* NumPy 
 
 * **Domain and Scene Transfer**
 ![01](https://github.com/user-attachments/assets/0c935520-b7d5-467d-b41e-5c4039e7104d)
