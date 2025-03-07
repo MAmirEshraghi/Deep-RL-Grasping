@@ -1,5 +1,6 @@
 
-# Deep-RL-Grasping
+# Deep-RL-Grasping 
+## (in progress)
 
 DeepRL-Grasping is a modular repository for training reinforcement learning agents to perform robotic grasping in simulated environments using PyBullet and Stable-Baselines3. The project is designed with a clear separation of concerns, including modules for common utilities, simulation, environment definitions, sensors, actuators, rewards, curriculum learning, and training scripts.
 
@@ -137,7 +138,8 @@ Dependencies
 
   
 * **Domain transfer performance**
-![Uploading 06.gif…]()
+![06](https://github.com/user-attachments/assets/2d6c959c-0e68-477c-8d37-2837963dec1e)
+
 ![SACGripperEnvRes](https://github.com/user-attachments/assets/b98521ac-7653-4894-abac-a447b3ee057b)
 
 
