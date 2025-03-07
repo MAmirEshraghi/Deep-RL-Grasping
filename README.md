@@ -3,6 +3,8 @@
 
 DeepRL-Grasping is a modular repository for training reinforcement learning agents to perform robotic grasping in simulated environments using PyBullet and Stable-Baselines3. The project is designed with a clear separation of concerns, including modules for common utilities, simulation, environment definitions, sensors, actuators, rewards, curriculum learning, and training scripts.
 
+![07](https://github.com/user-attachments/assets/dc315482-a9cf-487c-a1db-2b4566d74de3)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,7 +16,6 @@ DeepRL-Grasping is a modular repository for training reinforcement learning agen
 - [Configuration](#configuration)
 - [Dependencies](#dependencies)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
@@ -127,31 +128,21 @@ The config folder contains YAML files that define parameters for different tasks
 * NumPy
 
 * **Domain and Scene Transfer**
+![01](https://github.com/user-attachments/assets/0c935520-b7d5-467d-b41e-5c4039e7104d)
 
- <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/testtraining.jpg" width="75%">
 
 * **Different Perception Layers**
+![02](https://github.com/user-attachments/assets/cbe1afa3-d453-4132-b3c4-68d89448705b)
 
- <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/NewPerception.png" width="75%">
-
-* **Ablation Studies**
-
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/ablation/SAC_performance_shaped_reward_vs_sparse_reward.png" width="45%">
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/ablation/SAC_performance_wo_actuator_width.png" width="45%">
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/ablation/SAC_performance_wo_curriculum_strategy.png" width="45%">
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/ablation/SAC_performance_wo_normalization.png" width="45%">
 
 * **Training Environment**
+![04](https://github.com/user-attachments/assets/c99e80d1-86e5-4f06-9095-b644a348e51c)
 
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/trainingEnv.gif" width="50%">
   
 * **Domain transfer performance**
+![Uploading 06.gif…]()
+![SACGripperEnvRes](https://github.com/user-attachments/assets/b98521ac-7653-4894-abac-a447b3ee057b)
 
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/SACGripperEnvRes.png">
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/GripperEnv.gif" width="45%">
-
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/SACKukaEnv.png">
-  <img src="https://github.com/BarisYazici/masters_thesis/blob/master/figures/kukaGif.gif" width="45%">  
 
 # Contributing
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
